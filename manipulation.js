@@ -81,11 +81,49 @@ const allLisInsideFooter = document.querySelectorAll('#footer-menu > li')
 // torna SEMPRE una NodeList, una struttura array-like che è compatibile con forEach, map, filter etc.
 console.log('allLisInsideFooter', allLisInsideFooter)
 
-// quindi la differrenza tra querySelector e querySelectorAll
+// quindi la differenza tra querySelector e querySelectorAll
 // è che nel primo prende il primo elemento mentre nel secondo
 // prende tutti gli elementi!
 
+// quando possibile dovremmo cercare di non utilizzare i querySelector per un puro discorso prestazionale:
 // document.querySelector('#first') <-- spreco di risorse!
 // document.getElementById('first) <-- meglio ottimizzato!
 
-// .parentElement
+// facciamo ora qualche esempio di selezione di elementi veri nella pagina!
+const thirdArticle = document.getElementsByClassName('content')[2]
+console.log('thirdArticle', thirdArticle)
+
+const secondMainMenuLi = document.querySelector(
+  '#main-menu > li:nth-of-type(2)'
+)
+console.log('secondMainMenuLi', secondMainMenuLi)
+
+// .parentElement troverà SEMPRE, dato un elemento, il suo genitore (se dovesse servirvi)
+console.log('secondMainMenuLi', secondMainMenuLi.parentElement) // <-- torna la <ul> che contiene il secondo <li>
+
+// 2) DOM MANIPULATION (manipolazione degli elementi trovati con 1) )
+
+// ogni elemento testuale ha una proprietà che si chiama .innerText
+// trovo l'<h1> nella pagina:
+const pageTitle = document.getElementById('main-title')
+// pageTitle è UN OGGETTO!
+// .innerText funziona "in lettura"...
+console.log(pageTitle.innerText) // "DOM Manipulation"
+// ...ma funziona anche "in scrittura"! potete CAMBIARE il valore di una qualsiasi, essendo pageTitle un oggetto!
+pageTitle.innerText = 'EPICODE RULES!'
+
+pageTitle.classList.add('classe-di-test') // aggiunge al titolo una nuova class
+pageTitle.classList.add('red-color') // aggiunge al titolo una nuova class
+pageTitle.classList.remove('classe-di-test') // rimuove la classe di test aggiunta prima
+
+// style
+pageTitle.style.fontSize = '3em'
+pageTitle.style.opacity = '0.5'
+
+const removeTitle = function () {
+  const title = document.getElementsByTagName('h1')[0]
+  title.style.display = 'none'
+}
+
+// removeTitle() // <-- finchè non decommento removeTitle(), il titolo rimane lì perchè ho definito la logica
+// in una funzione ma non l'ho ancora mai eseguita!

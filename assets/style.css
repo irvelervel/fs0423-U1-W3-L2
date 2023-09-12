@@ -67,3 +67,11 @@ footer {
 #footer-menu > li {
   /* trova tutti gli <li> discendenti diretti dell'elemento con id="footer-menu" */
 }
+
+#main-menu > li:nth-of-type(2) {
+  color: red;
+}
+
+.red-color {
+  color: red;
+}
