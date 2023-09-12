@@ -13,15 +13,16 @@
       <header>
         <nav>
           <ul id="main-menu">
-            <li class="special-li">Home</li>
+            <li id="special-li">Home</li>
             <li>Chi siamo</li>
             <li>Contatti</li>
             <li>About</li>
           </ul>
         </nav>
-        <h1 id="main-title">DOM Manipulation</h1>
+        <h1 id="main-title" onclick="appendAnotherLi()">DOM Manipulation</h1>
       </header>
       <main>
+        <button onclick="appendAnotherLi()">CLICCAMI</button>
         <article class="content">
           <p>
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis
@@ -37,7 +38,7 @@
           <img src="https://placekitten.com/200" />
         </article>
         <article class="content">
-          <p>
+          <p id="par">
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis
             dolor aperiam laborum debitis, sit sint accusantium eligendi cum aut
             perspiciatis dicta, aliquam rem odit corporis deserunt placeat atque
@@ -47,8 +48,8 @@
             odit corporis deserunt placeat atque architecto pariatur.
           </p>
         </article>
-        <ol>
-          <li>First</li>
+        <ol id="ordered-list">
+          <li><a href="www.epicode.com">First</a></li>
           <li>Second</li>
           <li>Third</li>
           <li>Fourth</li>

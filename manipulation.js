@@ -127,3 +127,78 @@ const removeTitle = function () {
 
 // removeTitle() // <-- finchè non decommento removeTitle(), il titolo rimane lì perchè ho definito la logica
 // in una funzione ma non l'ho ancora mai eseguita!
+
+// proviamo a cambiare il colore del testo a TUTTI gli <li> della lista ordinata:
+
+const makeThemAllGreen = function () {
+  // seleziono con querySelectorAll TUTTI gli <li> dentro la <ol> con id "ordered-list"
+  const allTheLis = document.querySelectorAll('#ordered-list li') // torna una NodeList di <li>
+  // NodeList è una struttura come un array, posso ciclarla con forEach, map, filter...
+  allTheLis.forEach((singleLi) => {
+    // singleLi, finalmente, è un oggetto singolo! posso utilizzare le tecniche della DOM manipulation
+    singleLi.style.color = 'green'
+  })
+}
+
+makeThemAllGreen()
+
+const makeThisOrange = function (elementId) {
+  const element = document.getElementById(elementId)
+  element.style.color = 'orange'
+}
+
+makeThisOrange('special-li')
+makeThisOrange('par')
+
+// qualora utilizziaste getElementsByClassName oppure getElementsByTagName, ricordatevi che non tornano
+// una NodeList ma una HTMLCollection; quindi non potreste farci forEach, map, filter etc.
+// Soluzioni: 1) utilizzare un semplice for per ciclarli
+// 2) trasformare la HTMLCollection in un vero e proprio array:
+const myCollection = document.getElementsByClassName('content') // HTMLCollection
+const arrayFromTheCollection = Array.from(myCollection) // un vero e proprio array! qui potete usare forEach, map, filter etc.
+
+// altra cosa che si può fare: assegnare o leggere ATTRIBUTI dagli elementi
+// GETATTRIBUTE/SETATTRIBUTE
+
+// selezioniamo il primo <li> nella <ol> (con il link)
+const anchorInsideFirstLi = document.querySelector('ol li a') // mi torna il link <a> dentro il primo <li> nella <ol>
+console.log(anchorInsideFirstLi.getAttribute('href')) // "www.epicode.com"
+anchorInsideFirstLi.setAttribute('href', 'https://www.google.com') // riassegnarlo a un nuovo valore
+
+// fin'adesso abbiamo _modificato_ la pagina!
+// ma noi possiamo anche GENERARE CONTENUTI da zero!
+// createElement()
+
+// il metodo createElement() permette di creare "in memoria" un nuovo nodo per la pagina
+const generateNewP = function () {
+  const myNewParagraph = document.createElement('p') // <p></p>
+  myNewParagraph.innerText =
+    'Questo paragrafo è stato interamente generato via JS!'
+  myNewParagraph.classList.add('new-p')
+  myNewParagraph.style.fontStyle = 'italic'
+  // <p>Questo paragrafo è stato interamente generato via JS!</p>
+  // il p esiste, ma solo in memoria (come una variabile)
+  // per fargli raggiungere il DOM, bisogna APPENDERLO a qualcos'altro
+  // lo appendiamo al main:
+  const main = document.getElementsByTagName('main')[0]
+  main.appendChild(myNewParagraph)
+}
+
+generateNewP()
+
+const appendAnotherLi = function () {
+  const list = document.getElementById('ordered-list')
+  const newLi = document.createElement('li') // <li></li>
+  newLi.innerText = 'Sesto' // <li>Sesto</li>
+  newLi.style.color = 'green'
+  list.appendChild(newLi) // appendo fisicamente il mio <li> alla <ol>
+}
+
+// appendAnotherLi()
+
+// 1) SI CREA L'ELEMENTO
+// 2) SI RIEMPIE/STILA L'ELEMENTO
+// 3) SI TROVA IL PADRE A CUI LO SI VUOLE APPENDERE
+// 4) SI APPENDE SUL PADRE IL NUOVO ELEMENTO
+
+// IMPARIAMO A COLLEGARE UNA DELLE FUNZIONI CHE ABBIAMO SCRITTO AL CLICK DEL MOUSE
